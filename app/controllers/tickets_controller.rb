@@ -1,6 +1,12 @@
 class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
+
+  def answer
+    binding.pry
+  end
+
+
   def index
     @tickets = Ticket.all
 

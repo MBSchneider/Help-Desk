@@ -6,6 +6,8 @@ gem 'figaro'
 
 gem 'postmark'
 gem 'postmark-rails'
+gem 'postmark-mitt'
+gem 'pry'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
