@@ -3,7 +3,8 @@ class TicketsController < ApplicationController
   # GET /tickets.json
 
   def answer
-    binding.pry
+    @my_email = Postmark::Inbound.to_ruby_hash
+    TicketMailer.ticket_mail(@my_email).deliver
   end
 
 
