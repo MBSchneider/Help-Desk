@@ -4,6 +4,9 @@ gem 'rails', '3.2.14'
 
 gem 'figaro'
 
+gem 'postmark'
+gem 'postmark-rails'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
