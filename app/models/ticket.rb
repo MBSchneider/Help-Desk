@@ -1,8 +1,8 @@
 class Ticket < ActiveRecord::Base
   attr_accessible :description, :answer, :id
 
-  def self.update_from_postmark()
-
+  def self.update_from_postmark(answer)
+    @answer = answer
   end
 end
 

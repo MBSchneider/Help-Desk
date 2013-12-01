@@ -11,11 +11,13 @@ class TicketsController < ApplicationController
     puts ""
     puts "*********"
     puts ""
-    puts "BODY IS: " + hash_req[:text_body]
-    puts "ID IS: " + hash_req[:tag].to_s
-    answered_ticket = Ticket.find(hash_req[:tag].to_i)
-    answered_ticket.answer = hash_req[:text_body]
-
+    puts "BODY IS: " + hash_req[:text_body].split("Ticket ID:")[1].split("\r")[0]
+    binding.pry
+    answered_ticket = Ticket.find(hash_req[:text_body].split("Ticket ID:")[1].split("\r")[0].to_i)
+    puts answered_ticket
+    answered_ticket.answer = hash_req[:text_body].split("\r")[0]
+    answered_ticket.save
+    redirect_to tickets_path
   end
 
 
