@@ -7,8 +7,13 @@ class TicketsController < ApplicationController
     json_req = Postmark::Json.decode(request.body.read)
     hash_req = Postmark::Inbound.to_ruby_hash(json_req)
     puts hash_req
+    puts "*********"
+    puts ""
+    puts "*********"
+    puts ""
     puts "BODY IS: " + hash_req[:text_body]
-    answered_ticket = Ticket.find(hash_req[:id].to_i)
+    puts "ID IS: " + hash_req[:tag].to_s
+    answered_ticket = Ticket.find(hash_req[:tag].to_i)
     answered_ticket.answer = hash_req[:text_body]
 
   end
