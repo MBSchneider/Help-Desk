@@ -6,15 +6,7 @@ class TicketsController < ApplicationController
     request.body.rewind
     json_req = Postmark::Json.decode(request.body.read)
     hash_req = Postmark::Inbound.to_ruby_hash(json_req)
-    puts hash_req
-    puts "*********"
-    puts ""
-    puts "*********"
-    puts ""
-    puts "BODY IS: " + hash_req[:text_body].split("Ticket ID:")[1].split("\r")[0]
-    binding.pry
     answered_ticket = Ticket.find(hash_req[:text_body].split("Ticket ID:")[1].split("\r")[0].to_i)
-    puts answered_ticket
     answered_ticket.answer = hash_req[:text_body].split("\r")[0]
     answered_ticket.save
     redirect_to tickets_path
