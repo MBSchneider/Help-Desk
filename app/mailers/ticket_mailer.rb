@@ -1,9 +1,9 @@
 class TicketMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: ENV["USER_NAME"]
 
-  def ticket_mail(description)
-    @description = description
-    mail(to: 'schneider.matthew.b@gmail.com', subject: 'Support Ticket')
+  def ticket_mail(ticket)
+    @ticket = ticket
+    mail(to: ENV["GMAIL"], subject: 'Support Ticket', tag: @ticket.id.to_s)
 
   end
 

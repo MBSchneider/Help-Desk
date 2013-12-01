@@ -2,12 +2,7 @@ HelpDesk::Application.routes.draw do
   resources :tickets
   resources :users
 
-  get 'answer', to: 'tickets#answer'
-
-  namespace :api do
-    resources :tickets, :only => [ :update ]
-  end
-
+  post 'answer', to: 'tickets#answer'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

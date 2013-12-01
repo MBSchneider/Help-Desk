@@ -3,8 +3,14 @@ class TicketsController < ApplicationController
   # GET /tickets.json
 
   def answer
-    @my_email = Postmark::Inbound.to_ruby_hash
-    TicketMailer.ticket_mail(@my_email).deliver
+    request.body.rewind
+    json_req = Postmark::Json.decode(request.body.read)
+    hash_req = Postmark::Inbound.to_ruby_hash(json_req)
+    puts hash_req
+    puts "BODY IS: " + hash_req[:text_body]
+    answered_ticket = Ticket.find(hash_req[:id].to_i)
+    answered_ticket.answer = hash_req[:text_body]
+
   end
 
 
@@ -48,10 +54,10 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(params[:ticket])
-
     respond_to do |format|
       if @ticket.save
-        TicketMailer.ticket_mail(@ticket.description).deliver
+        # binding.pry
+        TicketMailer.ticket_mail(@ticket).deliver
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else

@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Description</th>
+    <th>Answer</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @tickets.each do |ticket| %>
   <tr>
     <td><%= ticket.description %></td>
+    <td><%= ticket.answer %></td>
     <td><%= link_to 'Show', ticket %></td>
     <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
     <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
